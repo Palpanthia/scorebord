@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>スコアボード</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center; /* ページ全体を中央揃えに */
+        }
+        .container {
+            display: inline-block; /* コンテンツを中央に揃えるために */
+            text-align: left; /* 内部コンテンツは左揃え */
+        }
+        table {
+            width: 80%;
+            margin: 20px auto; /* テーブルを中央揃えに */
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: center; /* テーブル内のテキストも中央揃え */
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .input-group {
+            display: flex;
+            justify-content: center; /* フォームを中央に配置 */
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .input-group label {
+            margin-right: 5px;
+            font-size: 18px; /* ラベルの文字サイズを大きく */
+        }
+        .input-group input {
+            padding: 10px;
+            font-size: 16px; /* 入力フィールドの文字サイズを大きく */
+            width: 200px; /* 入力フィールドの幅を広く */
+        }
+        .input-group button {
+            padding: 10px 20px;
+            font-size: 16px; /* ボタンの文字サイズを大きく */
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .input-group button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>スコアボード</h2>
+
+        <div class="input-group">
+            <label for="name">名前:</label>
+            <input type="text" id="name" name="name">
+            
+            <label for="score">スコア:</label>
+            <input type="number" id="score" name="score">
+            
+            <button onclick="addToTable()">送信</button>
+        </div>
+
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th>名前</th>
+                    <th>スコア</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Rows will be added here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function addToTable() {
+            // Get the values from the textboxes
+            let name = document.getElementById('name').value;
+            let score = document.getElementById('score').value;
+
+            // Check if both fields are filled
+            if (name && score) {
+                // Create a new row
+                let table = document.getElementById('dataTable').getElementsByTagName('tbody')[0];
+                let newRow = table.insertRow();
+
+                // Insert cells and set the values
+                let cell1 = newRow.insertCell(0);
+                let cell2 = newRow.insertCell(1);
+                cell1.textContent = name;
+                cell2.textContent = score;
+
+                // Clear the textboxes after submission
+                document.getElementById('name').value = '';
+                document.getElementById('score').value = '';
+            } else {
+                alert("名前とスコアを入力してください。スコアがない場合は、到達したステージなどを入力してください。");
+            }
+        }
+    </script>
+
+</body>
+</html>
