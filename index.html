@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>スコアボード</title>
+    <title>Name and Score Table</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -61,7 +61,7 @@
 <body>
 
     <div class="container">
-        <h2>スコアボード</h2>
+        <h2>Name and Score Table</h2>
 
         <div class="input-group">
             <label for="name">名前:</label>
@@ -87,29 +87,44 @@
     </div>
 
     <script>
+        let tableData = []; // スコアデータを保存するための配列
+
         function addToTable() {
-            // Get the values from the textboxes
+            // 入力フィールドから値を取得
             let name = document.getElementById('name').value;
             let score = document.getElementById('score').value;
 
-            // Check if both fields are filled
+            // 名前とスコアが入力されていることを確認
             if (name && score) {
-                // Create a new row
-                let table = document.getElementById('dataTable').getElementsByTagName('tbody')[0];
-                let newRow = table.insertRow();
+                // スコアを数値として配列に追加
+                tableData.push({ name: name, score: parseInt(score) });
 
-                // Insert cells and set the values
-                let cell1 = newRow.insertCell(0);
-                let cell2 = newRow.insertCell(1);
-                cell1.textContent = name;
-                cell2.textContent = score;
+                // スコアで降順に並べ替え
+                tableData.sort((a, b) => b.score - a.score);
 
-                // Clear the textboxes after submission
+                // テーブルを更新
+                updateTable();
+
+                // 入力フィールドをクリア
                 document.getElementById('name').value = '';
                 document.getElementById('score').value = '';
             } else {
-                alert("名前とスコアを入力してください。スコアがない場合は、到達したステージなどを入力してください。");
+                alert("名前とスコアの両方を入力してください。");
             }
+        }
+
+        function updateTable() {
+            let tableBody = document.getElementById('dataTable').getElementsByTagName('tbody')[0];
+            tableBody.innerHTML = ''; // テーブルをクリア
+
+            // テーブルデータをループして行を追加
+            tableData.forEach(row => {
+                let newRow = tableBody.insertRow();
+                let cell1 = newRow.insertCell(0);
+                let cell2 = newRow.insertCell(1);
+                cell1.textContent = row.name;
+                cell2.textContent = row.score;
+            });
         }
     </script>
 
