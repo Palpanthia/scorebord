@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Name and Score Table</title>
+    <title>Score Ranking</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -61,7 +61,7 @@
 <body>
 
     <div class="container">
-        <h2>Name and Score Table</h2>
+        <h2>スコアランキング</h2>
 
         <div class="input-group">
             <label for="name">名前:</label>
@@ -76,6 +76,7 @@
         <table id="dataTable">
             <thead>
                 <tr>
+                    <th>順位</th>
                     <th>名前</th>
                     <th>スコア</th>
                 </tr>
@@ -118,12 +119,15 @@
             tableBody.innerHTML = ''; // テーブルをクリア
 
             // テーブルデータをループして行を追加
-            tableData.forEach(row => {
+            tableData.forEach((row, index) => {
                 let newRow = tableBody.insertRow();
-                let cell1 = newRow.insertCell(0);
-                let cell2 = newRow.insertCell(1);
-                cell1.textContent = row.name;
-                cell2.textContent = row.score;
+                let rankCell = newRow.insertCell(0); // 順位のセル
+                let nameCell = newRow.insertCell(1); // 名前のセル
+                let scoreCell = newRow.insertCell(2); // スコアのセル
+
+                rankCell.textContent = index + 1; // 順位（1からスタート）
+                nameCell.textContent = row.name;
+                scoreCell.textContent = row.score;
             });
         }
     </script>
