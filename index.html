@@ -97,7 +97,7 @@
             // 名前とスコアが入力されていることを確認
             if (name && score) {
                 // スコアを数値として配列に追加
-                tableData.push({ name: name, score: parseInt(score) });
+                tableData.push({ name: name, score: parseInt(score, 10) });
 
                 // スコアで降順に並べ替え
                 tableData.sort((a, b) => b.score - a.score);
